@@ -1,3 +1,4 @@
+using Customers.API.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Customers.API.Controllers
@@ -6,6 +7,13 @@ namespace Customers.API.Controllers
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
+        private readonly IUsersService _usersService;
+
+        public UsersController(IUsersService usersService)
+        {
+            _usersService = usersService;
+        }
+
         public UsersController()
         {
         }
