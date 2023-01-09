@@ -19,7 +19,10 @@ namespace Customers.API.Controllers
         {
             var users = await _usersService.GetAllUsers();
 
-            return Ok(users);
+            if(users.Any())
+                return Ok(users);
+
+            return NotFound();
         }
     }
 }
