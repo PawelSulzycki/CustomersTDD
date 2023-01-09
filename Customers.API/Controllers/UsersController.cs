@@ -14,10 +14,6 @@ namespace Customers.API.Controllers
             _usersService = usersService;
         }
 
-        public UsersController()
-        {
-        }
-
         [HttpGet(Name = "GetUsers")]
         public async Task<IActionResult> Get()
         {
