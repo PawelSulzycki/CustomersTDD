@@ -8,7 +8,9 @@ namespace Customers.UnitTests.Systems.Controllers
         public async Task Get_OnSuccess_ReturnsStatusCode200()
         {
             // Arrange
-            var controller = new UsersController();
+            var mockUserService = new Mock<IUsersService>();
+
+            var controller = new UsersController(mockUserService.Object);
 
             // Act
             var result = (OkObjectResult)await controller.Get();
@@ -18,7 +20,7 @@ namespace Customers.UnitTests.Systems.Controllers
         }
 
         [Fact]
-        public async Task Get_OnSuccess_InvokesUserService()
+        public async Task Get_OnSuccess_InvokesUserServiceExactlyOnce()
         {
             // Arrange
             var mockUserService = new Mock<IUsersService>();
