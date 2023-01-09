@@ -19,7 +19,7 @@ namespace Customers.API.Controllers
         {
             var users = await _usersService.GetAllUsers();
 
-            return Ok("everything is OK");
+            return Ok(users);
         }
     }
 }

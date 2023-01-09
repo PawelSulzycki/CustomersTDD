@@ -32,10 +32,31 @@ namespace Customers.UnitTests.Systems.Controllers
             var controller = new UsersController(mockUserService.Object);
 
             // Act
-            var result = (OkObjectResult)await controller.Get();
+            var result = await controller.Get();
 
             // Assert
             mockUserService.Verify(x => x.GetAllUsers(), Times.Once());
+        }
+
+        [Fact]
+        public async Task Get_OnSuccess_ReturnsListOfUsers()
+        {
+            // Arrange
+            var mockUserService = new Mock<IUsersService>();
+
+            mockUserService
+                .Setup(x => x.GetAllUsers())
+                .ReturnsAsync(new List<User>());
+
+            var controller = new UsersController(mockUserService.Object);
+
+            // Act
+            var result = await controller.Get();
+
+            // Assert
+            result.Should().BeOfType<OkObjectResult>();
+            var objectResult = (OkObjectResult)result;
+            objectResult.Value.Should().BeOfType<List<User>>();
         }
     }
 }
